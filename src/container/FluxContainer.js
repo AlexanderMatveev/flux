@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-2015, Facebook, Inc.
+ * Copyright (c) 2014-present, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -87,7 +87,7 @@ const DEFAULT_OPTIONS = {
  *       return [BarStore, FooStore];
  *     }
  *
- *     statc calculateState(prevState, props) {
+ *     static calculateState(prevState, props) {
  *       const {BarStore, FooStore} = props.stores;
  *       return {
  *         bar: BarStore.getState(),
@@ -131,7 +131,7 @@ function create<DefaultProps, Props, State>(
     constructor(props: Props, context: any) {
       super(props, context);
       this._fluxContainerSubscriptions = new FluxContainerSubscriptions();
-      this._fluxContainerSubscriptions.setStores(getStores(props));
+      this._fluxContainerSubscriptions.setStores(getStores(props, context));
       this._fluxContainerSubscriptions.addListener(() => {
         this.setState(
           (prevState, currentProps) => getState(
